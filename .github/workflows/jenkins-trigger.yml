@@ -7,7 +7,7 @@ jobs:
     name: Send Jenkins Pull Request Webhook
     steps:
       - name: Wait for compliance
-        uses: fountainhead/action-wait-for-check@v1.0.0
+        uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-compliance
         with:
           token: ${{ secrets.NCS_GITHUB_TOKEN }}
@@ -15,7 +15,7 @@ jobs:
           checkName: "Run compliance checks on patch series (PR)"
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Wait for oss history
-        uses: fountainhead/action-wait-for-check@v1.0.0
+        uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-oss
         with:
           token: ${{ secrets.NCS_GITHUB_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Send Jenkins webhook
         if: ${{ (steps.wait-for-compliance.outputs.conclusion == 'success') && (steps.wait-for-oss.outputs.conclusion == 'success') }}
-        uses: johannes-huther/webhook.sh@v1
+        uses: johannes-huther/webhook.sh@v1.0.0
         env:
           webhook_type: 'json-extended'
           webhook_url: ${{ secrets.JENKINS_WEBHOOK_URL }}
