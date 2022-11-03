@@ -24,7 +24,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Send Jenkins webhook
         if: ${{ (steps.wait-for-compliance.outputs.conclusion == 'failure') && (steps.wait-for-oss.outputs.conclusion == 'failure') }}
-        uses: johannes-huther/webhook.sh@v1
+        uses: distributhor/workflow-webhook@v3.0.1
         env:
           webhook_type: 'json-extended'
           webhook_url: ${{ secrets.JENKINS_WEBHOOK_URL }}
