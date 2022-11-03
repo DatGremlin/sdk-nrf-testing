@@ -1,5 +1,5 @@
 name: Jenkins Job Trigger
-on: pull_request_target
+on: pull_request
 
 jobs:
   workflow_data:
