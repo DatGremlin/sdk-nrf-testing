@@ -26,6 +26,7 @@ jobs:
         if: ${{ (steps.wait-for-compliance.outputs.conclusion == 'failure') && (steps.wait-for-oss.outputs.conclusion == 'failure') }}
         uses: distributhor/workflow-webhook@v3.0.1
         env:
+          event: 'pull_request'
           webhook_type: 'json-extended'
           webhook_url: ${{ secrets.JENKINS_WEBHOOK_URL }}
           webhook_secret: ${{ secrets.JENKINS_WEBHOOK_SECRET }}
